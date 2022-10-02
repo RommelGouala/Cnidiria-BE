@@ -1,10 +1,9 @@
-// const Post = require('../models/post')
+const Post = require('../models/post')
 
 async function getAllPosts(req, res){
     try {
-        // const posts = await Post.find()
-        //res.send(posts)
-        res.send("All Posts endpoint")
+        const posts = await Post.find()
+        res.send(posts)
     } catch (error) {
         console.log(error)
         res.status(500).json({'message': 'error getting all posts'})
@@ -14,9 +13,8 @@ async function getAllPosts(req, res){
 async function getOnePost(req, res){
     try {
         const { id } = req.params
-        //const post = await Post.findById(id)
-        //res.send(post)
-        res.send("One Posts endpoint for id " + id)
+        const post = await Post.findById(id)
+        res.send(post)
     } catch (error) {
         console.log(error)
         res.status(500).json({'message': 'error getting post by ID'})
@@ -25,13 +23,12 @@ async function getOnePost(req, res){
 
 async function addPost(req, res){
     try {
-        // const { title, desc, date, timeframe, location, jobtype, budget, postowner } = req.body
-        // const post = await new Post({
-        //     ...req.body
-        // }).save()
+        const { title, desc, date, timeframe, location, jobtype, budget, postowner } = req.body
+        const post = await new Post({
+            ...req.body
+        }).save()
 
-        // res.status(201).json({ 'message': 'Post successfully created'})
-        res.send("added one post")
+        res.status(201).json({ 'message': 'Post successfully created'})
     } catch (error) {
         console.log(error)
         res.status(500).json({'message': 'error adding post'})
@@ -41,9 +38,8 @@ async function addPost(req, res){
 async function deletePost(req, res){
     try {
         const { id } = req.params
-        // const post = await Post.findByIdAndDelete(id)
-        // res.json({"message": `Post id ${id} had been deleted.`})
-        res.send("delete one post with id " + id)
+        const post = await Post.findByIdAndDelete(id)
+        res.json({"message": `Post id ${id} had been deleted.`})
     } catch (error) {
         console.log(error)
         res.status(500).json({'message': 'error deleting post'})
