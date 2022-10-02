@@ -22,14 +22,14 @@ const postSchema = new mongoose.Schema({
     },
     jobType: {
         type: String,
-        required: True
+        required: true
     },
     budget: {
         type: Number
     },
     postOwner: {
         type: String,
-        required: True
+        required: true
     }
 
 })
