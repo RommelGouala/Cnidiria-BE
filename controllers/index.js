@@ -1,4 +1,14 @@
+const pgp = require('pg-promise')
 
+const connection = {
+    host: 'localhost',
+    port: 5432,
+    database: 'Cnidiria',
+    user: 'postgres',
+    password: 'postgres'
+};
+
+const db = pgp(connection)
 
 async function getAllPosts(req, res){
     try {
@@ -23,8 +33,7 @@ async function getOnePost(req, res){
 
 async function addPost(req, res){
     try {
-        // const { id } = req.params
-        //db call
+        db.
         res.send("add one post")
     } catch (error) {
         console.log(error)
