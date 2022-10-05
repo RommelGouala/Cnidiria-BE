@@ -22,6 +22,7 @@ async function getOneUser(req, res){
 }
 
 async function addUser(req, res){
+    console.log(req.body)
     try {
         const { name, password, role, email, phone, posts } = req.body
         const user = await new User({
