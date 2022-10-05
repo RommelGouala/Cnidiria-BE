@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const bcrypt = require('bcrypt')
 
 async function getAllUsers(req, res){
     try {
@@ -24,6 +25,7 @@ async function getOneUser(req, res){
 async function addUser(req, res){
     console.log(req.body)
     try {
+        req.body.password = await bcrypt.hash(req.body.password, 12)
         const { name, password, role, email, phone, posts } = req.body
         const user = await new User({
             ...req.body
@@ -47,9 +49,25 @@ async function deleteUser(req, res){
     }
 }
 
+async function loginUser(req, res){
+    try {
+        const user = await User.findOne({ name: req.body.name })
+        let result = await bcrypt.compare(req.body.password, user.password)
+        if (result){
+            res.send("passwords match!")
+        } else {
+            res.send("HAX")
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({'message': 'error checking password'})
+    }
+}
+
 module.exports = {
     getAllUsers,
     getOneUser,
     addUser,
-    deleteUser
+    deleteUser,
+    loginUser
 }
