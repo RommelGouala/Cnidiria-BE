@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.get('/all', getAllUsers)
 router.get('/:id', validateJWT, getOneUser)
-router.post('/login', validateJWT, loginUser)
+router.post('/login', loginUser)
 router.post('/', addUser)
 router.delete('/:id', deleteUser)
 

@@ -6,7 +6,7 @@ function validateJWT(req, res, next) {
 
     if (authHeader) {
         try {
-            const token = authHeader.split(' ')[1]
+            const token = authHeader
             const validToken = jwt.verify(token, process.env.JWT_SECRET)
             req.user = validToken
             next()
