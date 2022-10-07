@@ -90,10 +90,22 @@ async function loginUser(req, res){
     }
 }
 
+async function updateUser(req, res){
+    try {
+        const { id } = req.params
+        const user = await User.findByIdAndUpdate(id, req.body)
+        res.redirect(`/user/${id}`)
+    } catch (error) {
+        console.log(error)
+        res.send('error updating user')
+    }
+}
+
 module.exports = {
     getAllUsers,
     getOneUser,
     addUser,
     deleteUser,
-    loginUser
+    loginUser,
+    updateUser
 }

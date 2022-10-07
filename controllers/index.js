@@ -46,9 +46,21 @@ async function deletePost(req, res){
     }
 }
 
+async function updatePost(req, res){
+    try {
+        const { id } = req.params
+        const post = await Post.findByIdAndUpdate(id, req.body)
+        res.redirect(`/index/${id}`)
+    } catch (error) {
+        console.log(error)
+        res.send('error updating post')
+    }
+}
+
 module.exports = {
     getAllPosts,
     getOnePost,
     addPost,
-    deletePost
+    deletePost,
+    updatePost
 }
