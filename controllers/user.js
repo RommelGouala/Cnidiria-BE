@@ -78,12 +78,15 @@ async function loginUser(req, res){
             res.send(token)
     
             // res.status(201).json({ 'message': 'user successfully logged in'})
+            
         } else {
             res.send("HAX")
         }
     } catch (error) {
         console.log(error)
+        
         // res.status(500).json({'message': 'error checking password'})
+
     }
 }
 

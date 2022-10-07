@@ -30,8 +30,9 @@ const postSchema = new mongoose.Schema({
         type: Number
     },
     postOwner: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+
     }
 
 })

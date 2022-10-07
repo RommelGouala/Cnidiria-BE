@@ -23,12 +23,20 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: Number
-    },
-    posts: {
-        type: String
     }
+    },{
+        toJSON: {virtuals: true}
+    })
 
-})
+    // virtuals
+
+    userSchema.virtual('posts', {
+        ref: 'Post',
+        localField: '_id',
+        foreignField: 'user'
+    })
+
+
 
 
 module.exports = mongoose.model('User', userSchema)
