@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 async function getAllUsers(req, res){
@@ -31,10 +32,18 @@ async function addUser(req, res){
             ...req.body
         }).save()
 
-        res.status(201).json({ 'message': 'user successfully created'})
+        const payload = {
+            name
+        }
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
+
+        res.send(token)
+
+        // res.status(201).json({ 'message': 'user successfully created'})
     } catch (error) {
         console.log(error)
-        res.status(500).json({'message': 'error adding user'})
+        // res.status(500).json({'message': 'error adding user'})
     }
 }
 
@@ -51,16 +60,33 @@ async function deleteUser(req, res){
 
 async function loginUser(req, res){
     try {
-        const user = await User.findOne({ name: req.body.name })
+        console.log(req.body)
+        const name = req.body.name
+        console.log(name)
+        const user = await User.findOne({ name: name })
+        console.log(user)
         let result = await bcrypt.compare(req.body.password, user.password)
+        // const tokenResult = await jwt.decode(process.env.JWT_SECRET, req.headers.authorization) 
+
         if (result){
-            res.send("passwords match!")
+            const payload = {
+                name
+            }
+    
+            const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
+    
+            res.send(token)
+    
+            // res.status(201).json({ 'message': 'user successfully logged in'})
+            
         } else {
             res.send("HAX")
         }
     } catch (error) {
         console.log(error)
-        res.status(500).json({'message': 'error checking password'})
+        
+        // res.status(500).json({'message': 'error checking password'})
+
     }
 }
 
