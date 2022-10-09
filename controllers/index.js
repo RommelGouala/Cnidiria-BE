@@ -23,7 +23,7 @@ async function getOnePost(req, res){
 
 async function addPost(req, res){
     try {
-        const { title, desc, date, timeframe, location, jobtype, budget, postowner } = req.body
+        const { title, desc, date, timeframe, location, jobType, budget, postOwner } = req.body
         const post = await new Post({
             ...req.body
         }).save()
