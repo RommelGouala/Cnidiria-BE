@@ -38,7 +38,12 @@ async function addUser(req, res){
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
-        res.json(token)
+        // res.json(token)
+
+        res.json({
+            "id": user._id,
+            "token": token
+        })
 
         // res.status(201).json({ 'message': 'user successfully created'})
     } catch (error) {
@@ -75,7 +80,12 @@ async function loginUser(req, res){
     
             const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
 
-            res.json(token)
+            // res.json(token)
+
+            res.json({
+                "id": user._id,
+                "token": token
+            })
     
             // res.status(201).json({ 'message': 'user successfully logged in'})
             
