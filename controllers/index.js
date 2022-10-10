@@ -50,7 +50,8 @@ async function updatePost(req, res){
     try {
         const { id } = req.params
         const post = await Post.findByIdAndUpdate(id, req.body)
-        res.redirect(`/index/${id}`)
+        // res.redirect(`/index/${id}`)
+        res.json(post)
     } catch (error) {
         console.log(error)
         res.send('error updating post')

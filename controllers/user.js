@@ -104,7 +104,8 @@ async function updateUser(req, res){
     try {
         const { id } = req.params
         const user = await User.findByIdAndUpdate(id, req.body)
-        res.redirect(`/user/${id}`)
+        // res.redirect(`/user/${id}`)
+        res.json(user)
     } catch (error) {
         console.log(error)
         res.send('error updating user')
