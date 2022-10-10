@@ -20,6 +20,7 @@ User Endpoints
 | ------------- | ------------- |
 | GET  | all users /user/all  |
 | GET  | single user /user/:id  |
+| POST  | create new user /user/  |
 | POST  | login user /user/login |
 | PUT  | edit existing user /user/:id  |
 | DELETE | post user/:id  |
